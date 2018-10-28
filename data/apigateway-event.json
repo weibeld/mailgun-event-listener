@@ -1,0 +1,112 @@
+{
+    "resource": "/",
+    "path": "/",
+    "httpMethod": "POST",
+    "headers": {
+        "Accept": "*/*",
+        "Accept-Encoding": "gzip",
+        "CloudFront-Forwarded-Proto": "https",
+        "CloudFront-Is-Desktop-Viewer": "true",
+        "CloudFront-Is-Mobile-Viewer": "false",
+        "CloudFront-Is-SmartTV-Viewer": "false",
+        "CloudFront-Is-Tablet-Viewer": "false",
+        "CloudFront-Viewer-Country": "US",
+        "Content-Type": "application/json",
+        "Host": "ytim622qoh.execute-api.us-east-1.amazonaws.com",
+        "User-Agent": "mailgun/treq-16.12.0",
+        "Via": "1.1 cbaf24859f4c3a79134eec74af18bbb8.cloudfront.net (CloudFront)",
+        "X-Amz-Cf-Id": "URNRx4q6eVWR2biHSA_e9Df46OaXOQ5abi6Zxzz4B0JFiGqua8Y-cA==",
+        "X-Amzn-Trace-Id": "Root=1-5bd0af2e-2347cf458e69e28f3e7068ea",
+        "X-Forwarded-For": "52.71.198.71, 54.239.145.70",
+        "X-Forwarded-Port": "443",
+        "X-Forwarded-Proto": "https"
+    },
+    "multiValueHeaders": {
+        "Accept": [
+            "*/*"
+        ],
+        "Accept-Encoding": [
+            "gzip"
+        ],
+        "CloudFront-Forwarded-Proto": [
+            "https"
+        ],
+        "CloudFront-Is-Desktop-Viewer": [
+            "true"
+        ],
+        "CloudFront-Is-Mobile-Viewer": [
+            "false"
+        ],
+        "CloudFront-Is-SmartTV-Viewer": [
+            "false"
+        ],
+        "CloudFront-Is-Tablet-Viewer": [
+            "false"
+        ],
+        "CloudFront-Viewer-Country": [
+            "US"
+        ],
+        "Content-Type": [
+            "application/json"
+        ],
+        "Host": [
+            "ytim622qoh.execute-api.us-east-1.amazonaws.com"
+        ],
+        "User-Agent": [
+            "mailgun/treq-16.12.0"
+        ],
+        "Via": [
+            "1.1 cbaf24859f4c3a79134eec74af18bbb8.cloudfront.net (CloudFront)"
+        ],
+        "X-Amz-Cf-Id": [
+            "URNRx4q6eVWR2biHSA_e9Df46OaXOQ5abi6Zxzz4B0JFiGqua8Y-cA=="
+        ],
+        "X-Amzn-Trace-Id": [
+            "Root=1-5bd0af2e-2347cf458e69e28f3e7068ea"
+        ],
+        "X-Forwarded-For": [
+            "52.71.198.71, 54.239.145.70"
+        ],
+        "X-Forwarded-Port": [
+            "443"
+        ],
+        "X-Forwarded-Proto": [
+            "https"
+        ]
+    },
+    "queryStringParameters": null,
+    "multiValueQueryStringParameters": null,
+    "pathParameters": null,
+    "stageVariables": null,
+    "requestContext": {
+        "resourceId": "pelg9hoo23",
+        "resourcePath": "/",
+        "httpMethod": "POST",
+        "extendedRequestId": "PSBPVGg5IAMFToA=",
+        "requestTime": "24/Oct/2018:17:43:10 +0000",
+        "path": "/Prod/",
+        "accountId": "202449302273",
+        "protocol": "HTTP/1.1",
+        "stage": "Prod",
+        "domainPrefix": "ytim622qoh",
+        "requestTimeEpoch": 1540402990988,
+        "requestId": "466466b0-d7b4-11e8-becc-ab9f07a56fea",
+        "identity": {
+            "cognitoIdentityPoolId": null,
+            "accountId": null,
+            "cognitoIdentityId": null,
+            "caller": null,
+            "sourceIp": "52.71.198.71",
+            "accessKey": null,
+            "cognitoAuthenticationType": null,
+            "cognitoAuthenticationProvider": null,
+            "userArn": null,
+            "userAgent": "mailgun/treq-16.12.0",
+            "user": null
+        },
+        "domainName": "ytim622qoh.execute-api.us-east-1.amazonaws.com",
+        "apiId": "ytim622qoh"
+    },
+    "body": "{\"signature\": {\"timestamp\": \"1540402990\", \"token\": \"57f493855ba96e6a285a893d90139966eb070cc4cf142b5a22\", \"signature\": \"dca69dd7ff9d542d5d3328aabf961e9e56b0deec6e2f036f6e60a5cd4299d388\"}, \"event-data\": {\"severity\": \"permanent\", \"tags\": [\"my_tag_1\", \"my_tag_2\"], \"timestamp\": 1521233195.375624, \"storage\": {\"url\": \"https://se.api.mailgun.net/v3/domains/quantumsense.ai/messages/message_key\", \"key\": \"message_key\"}, \"log-level\": \"error\", \"event\": \"failed\", \"campaigns\": [], \"reason\": \"suppress-bounce\", \"user-variables\": {\"my_var_1\": \"Mailgun Variable #1\", \"my-var-2\": \"awesome\"}, \"flags\": {\"is-routed\": false, \"is-authenticated\": true, \"is-system-test\": false, \"is-test-mode\": false}, \"recipient-domain\": \"example.com\", \"envelope\": {\"sender\": \"bob@quantumsense.ai\", \"transport\": \"smtp\", \"targets\": \"alice@example.com\"}, \"message\": {\"headers\": {\"to\": \"Alice <alice@example.com>\", \"message-id\": \"20130503192659.13651.20287@quantumsense.ai\", \"from\": \"Bob <bob@quantumsense.ai>\", \"subject\": \"Test permanent_fail webhook\"}, \"attachments\": [], \"size\": 111}, \"recipient\": \"alice@example.com\", \"id\": \"G9Bn5sl1TC6nu79C8C0bwg\", \"delivery-status\": {\"code\": 605, \"message\": \"\", \"attempt-no\": 1, \"description\": \"Not delivering to previously bounced address\", \"session-seconds\": 0}}}",
+    "isBase64Encoded": false
+}

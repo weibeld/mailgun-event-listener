@@ -1,0 +1,40 @@
+AWSTemplateFormatVersion: '2010-09-09'
+Parameters:
+  EmailParameter:
+    Type: String
+  MailgunDomainParameter:
+    Type: String
+Resources:
+  MailgunEventTopic:
+    Properties:
+      Subscription:
+      - Endpoint:
+          Ref: EmailParameter
+        Protocol: email
+    Type: AWS::SNS::Topic
+  MailgunWebhookFunction:
+    Properties:
+      CodeUri: s3://sam-quantumsense-ai/b7450c56e929ad64d639a61db06c8e88
+      Environment:
+        Variables:
+          MAILGUN_DOMAIN:
+            Ref: MailgunDomainParameter
+          SNS_TOPIC_ARN:
+            Ref: MailgunEventTopic
+      Events:
+        MailgunWebhookApi:
+          Properties:
+            Method: POST
+            Path: /
+          Type: Api
+      Handler: index.handler
+      Policies:
+      - SNSPublishMessagePolicy:
+          TopicName:
+            Fn::GetAtt:
+            - MailgunEventTopic
+            - TopicName
+      Runtime: nodejs8.10
+      Timeout: 10
+    Type: AWS::Serverless::Function
+Transform: AWS::Serverless-2016-10-31

@@ -1,0 +1,36 @@
+AWSTemplateFormatVersion : '2010-09-09'
+Transform: AWS::Serverless-2016-10-31
+
+Parameters:
+  EmailParameter:
+    Type: String
+  MailgunDomainParameter:
+    Type: String
+
+Resources:
+  MailgunWebhookFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: index.handler
+      Runtime: nodejs8.10
+      Timeout: 10
+      Events:
+        MailgunWebhookApi:
+          Type: Api
+          Properties:
+            Path: /
+            Method: POST
+      Policies:
+        - SNSPublishMessagePolicy:
+            TopicName: !GetAtt MailgunEventTopic.TopicName
+      Environment:
+        Variables:
+          SNS_TOPIC_ARN: !Ref MailgunEventTopic
+          MAILGUN_DOMAIN: !Ref MailgunDomainParameter
+
+  MailgunEventTopic:
+    Type: AWS::SNS::Topic
+    Properties:
+      Subscription:
+        - Endpoint: !Ref EmailParameter
+          Protocol: email
