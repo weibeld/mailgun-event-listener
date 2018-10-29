@@ -66,15 +66,17 @@ ${footer()}`
 
 // Unknown event
 
-exports.getUnknownEventSubject = function() {
-  return getSubject('Unknown Event')
+exports.getUnknownEventSubject = function(eventData) {
+  return getSubject(`Unknown Event "${eventData.event}`)
 }
 
 exports.getUnknownEventMessage = function(eventData) {
   const msgUri = getMailgunMsgUri(eventData.message.headers['message-id']);
-  return `Received unknown event "${eventData.event}".
+  return `Received unknown event "${eventData.event}" for the following message:
 
-Concerned message: ${msgUri}
+${msgUri}
+
+This event type is currently not supported.
 
 ${footer()}`
 }

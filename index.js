@@ -26,14 +26,14 @@ exports.handler = async function (event, context) {
         default:
           console.error(`Received unknown event: "failed (${eventData.severity})"`);
           message = notifications.getUnknownEventMessage(eventData);
-          subject = notifications.getUnknownEventSubject();
+          subject = notifications.getUnknownEventSubject(eventData);
           break;
       }
       break;
     default:
       console.error(`Received unknown event: "${eventData.event}"`);
       message = notifications.getUnknownEventMessage(eventData);
-      subject = notifications.getUnknownEventSubject();
+      subject = notifications.getUnknownEventSubject(eventData);
       break;
   }
 
