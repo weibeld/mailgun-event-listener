@@ -8,18 +8,19 @@ Parameters:
     Type: String
 
 Resources:
-  MailgunWebhookFunction:
+  PermanentFailFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: index.handler
+      CodeUri: app
+      Handler: permanent-fail.handler
       Runtime: nodejs8.10
       Timeout: 10
       Events:
         MailgunWebhookApi:
           Type: Api
           Properties:
-            Path: /
-            Method: POST
+           Path: /
+           Method: POST
       Policies:
         - SNSPublishMessagePolicy:
             TopicName: !GetAtt MailgunEventTopic.TopicName
