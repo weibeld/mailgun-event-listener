@@ -67,7 +67,7 @@ ${footer()}`
 // Unknown event
 
 exports.getUnknownEventSubject = function(eventData) {
-  return getSubject(`Unknown Event "${eventData.event}`)
+  return getSubject(`Unknown Event "${eventData.event}"`)
 }
 
 exports.getUnknownEventMessage = function(eventData) {
