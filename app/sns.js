@@ -10,10 +10,10 @@ exports.publish = async function(topic, message, subject) {
   };
   try {
     await sns.publish(params).promise();
-    console.log('Publishing SNS message successful');
+    console.log(`Publish SNS message to ${topic}`);
   }
   catch(err) {
-    console.log(`Publishing SNS message failed: ${err}`);
+    console.log(`Publishing SNS message to ${topic} failed: ${err}`);
     throw err;
   }
 }
