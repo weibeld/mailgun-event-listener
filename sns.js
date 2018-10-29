@@ -10,7 +10,7 @@ exports.publish = async function(topic, message, subject) {
   };
   try {
     await sns.publish(params).promise();
-    console.log(`Publish SNS message to ${topic}`);
+    console.log(`Publish SNS message to topic '${topic}'`);
   }
   catch(err) {
     console.log(`Publishing SNS message to topic '${topic}' failed: ${err}`);

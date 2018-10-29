@@ -13,15 +13,15 @@ exports.handler = async function (event, context) {
 
   // Check Mailgun event type. If wrong type is received, check webhook URLs.
   try {
-    await eventChecker.assertPermanentFail(eventData);
+    await eventChecker.assertFailed('temporary', eventData);
   } catch(err) {
     return { statusCode: 406, body: err.message };
   }
 
-  // Handle "permanent fail" event
-  console.log('Handling "failed (permanent)" event');
+  // Handle "failed (temporary)" event
+  console.log('Handling "failed (temporary)" event');
   const message = getMessage(eventData);
-  const subject = '[Mailgun Event Listener] Permanent Fail';
+  const subject = helpers.getSnsMessageSubject('Temporary Fail');
   try {
     await sns.publish(config.snsTopicArn, message, subject);
     return { statusCode: 200, body: "OK" };
@@ -38,8 +38,9 @@ function getMessage(eventData) {
   const deliveryStatusMessage = eventData['delivery-status'].message;
   const deliveryStatusDescription = eventData['delivery-status'].description;
   const deliveryStatusCode = eventData['delivery-status'].code;
+  const deliveryStatusRetrySeconds = eventData['delivery-status']['retry-seconds'];
 
-  return `Permanent fail for the following message:
+  return `Temporary fail for the following message:
 
 ${msgUri}
 
@@ -51,5 +52,6 @@ Delivery status:
 
 - Message: "${deliveryStatusMessage}"
 - Description: "${deliveryStatusDescription}"
-- Code: ${deliveryStatusCode}`
+- Code: ${deliveryStatusCode}
+- Retry seconds: ${deliveryStatusRetrySeconds}`
 }

@@ -2,36 +2,53 @@ AWSTemplateFormatVersion : '2010-09-09'
 Transform: AWS::Serverless-2016-10-31
 
 Parameters:
-  EmailParameter:
+  SnsEmailParameter:
     Type: String
   MailgunDomainParameter:
     Type: String
+
+Globals:
+  Function:
+    CodeUri: .
+    Runtime: nodejs8.10
+    Timeout: 10
+    Environment:
+      Variables:
+        SNS_TOPIC_ARN: !Ref MailgunEventTopic
+        MAILGUN_DOMAIN: !Ref MailgunDomainParameter    
 
 Resources:
   PermanentFailFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: .
-      Handler: permanent-fail.handler
-      Runtime: nodejs8.10
-      Timeout: 10
+      Handler: failed-permanent.handler
       Events:
         MailgunWebhookApi:
           Type: Api
           Properties:
-           Path: /
+           Path: /failed-permanent
            Method: POST
       Policies:
         - SNSPublishMessagePolicy:
             TopicName: !GetAtt MailgunEventTopic.TopicName
-      Environment:
-        Variables:
-          SNS_TOPIC_ARN: !Ref MailgunEventTopic
-          MAILGUN_DOMAIN: !Ref MailgunDomainParameter
+
+  TemporaryFailFunction:
+    Type: AWS::Serverless::Function
+    Properties:
+      Handler: failed-temporary.handler
+      Events:
+        MailgunWebhookApi:
+          Type: Api
+          Properties:
+           Path: /failed-temporary
+           Method: POST
+      Policies:
+        - SNSPublishMessagePolicy:
+            TopicName: !GetAtt MailgunEventTopic.TopicName
 
   MailgunEventTopic:
     Type: AWS::SNS::Topic
     Properties:
       Subscription:
-        - Endpoint: !Ref EmailParameter
+        - Endpoint: !Ref SnsEmailParameter
           Protocol: email

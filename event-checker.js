@@ -4,12 +4,12 @@ const config = require('./config');
 
 const subject = '[Mailgun Event Listener] Invalid Event'
 
-exports.assertPermanentFail = async function(eventData) {
-  if (eventData.event === 'failed' && eventData.severity === 'permanent') {
+exports.assertFailed = async function(severity, eventData) {
+  if (eventData.event === 'failed' && eventData.severity === severity) {
     return;
   }
   else {
-    const expected = 'failed (permanent)';
+    const expected = `failed (${severity})`;
     const received = eventData.event === 'failed' ? `failed (${eventData.severity})` : $eventData.event;
     const errMsg = `Invalid event type: expected "${expected}" but received "${received}"`;
     console.error(errMsg);
