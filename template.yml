@@ -5,46 +5,29 @@ Parameters:
   SnsEmailParameter:
     Type: String
   MailgunDomainParameter:
-    Type: String
-
-Globals:
-  Function:
-    CodeUri: .
-    Runtime: nodejs8.10
-    Timeout: 10
-    Environment:
-      Variables:
-        SNS_TOPIC_ARN: !Ref MailgunEventTopic
-        MAILGUN_DOMAIN: !Ref MailgunDomainParameter    
+    Type: String   
 
 Resources:
-  PermanentFailFunction:
+  MailgunEventFunction:
     Type: AWS::Serverless::Function
     Properties:
-      Handler: failed-permanent.handler
+      Handler: index.handler
+      CodeUri: .
+      Runtime: nodejs8.10
+      Timeout: 10
       Events:
         MailgunWebhookApi:
           Type: Api
           Properties:
-           Path: /failed-permanent
+           Path: /
            Method: POST
       Policies:
         - SNSPublishMessagePolicy:
             TopicName: !GetAtt MailgunEventTopic.TopicName
-
-  TemporaryFailFunction:
-    Type: AWS::Serverless::Function
-    Properties:
-      Handler: failed-temporary.handler
-      Events:
-        MailgunWebhookApi:
-          Type: Api
-          Properties:
-           Path: /failed-temporary
-           Method: POST
-      Policies:
-        - SNSPublishMessagePolicy:
-            TopicName: !GetAtt MailgunEventTopic.TopicName
+      Environment:
+        Variables:
+          SNS_TOPIC_ARN: !Ref MailgunEventTopic
+          MAILGUN_DOMAIN: !Ref MailgunDomainParameter    
 
   MailgunEventTopic:
     Type: AWS::SNS::Topic
