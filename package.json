@@ -10,7 +10,5 @@
   },
   "author": "",
   "license": "ISC",
-  "dependencies": {
-    "aws-sdk": "^2.341.0"
-  }
+  "dependencies": {}
 }

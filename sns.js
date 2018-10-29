@@ -13,7 +13,7 @@ exports.publish = async function(topic, message, subject) {
     console.log(`Publish SNS message to ${topic}`);
   }
   catch(err) {
-    console.log(`Publishing SNS message to ${topic} failed: ${err}`);
+    console.log(`Publishing SNS message to topic '${topic}' failed: ${err}`);
     throw err;
   }
 }

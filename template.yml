@@ -11,7 +11,7 @@ Resources:
   PermanentFailFunction:
     Type: AWS::Serverless::Function
     Properties:
-      CodeUri: app
+      CodeUri: .
       Handler: permanent-fail.handler
       Runtime: nodejs8.10
       Timeout: 10

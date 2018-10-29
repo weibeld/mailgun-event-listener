@@ -12,9 +12,9 @@ Resources:
           Ref: EmailParameter
         Protocol: email
     Type: AWS::SNS::Topic
-  MailgunWebhookFunction:
+  PermanentFailFunction:
     Properties:
-      CodeUri: s3://sam-quantumsense-ai/b7450c56e929ad64d639a61db06c8e88
+      CodeUri: s3://sam-quantumsense-ai/ec4b67f25c54861db620eda73ef3843d
       Environment:
         Variables:
           MAILGUN_DOMAIN:
@@ -27,7 +27,7 @@ Resources:
             Method: POST
             Path: /
           Type: Api
-      Handler: index.handler
+      Handler: permanent-fail.handler
       Policies:
       - SNSPublishMessagePolicy:
           TopicName:

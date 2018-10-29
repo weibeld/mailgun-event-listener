@@ -1,6 +1,7 @@
 const sns = require('./sns');
 const eventChecker = require('./event-checker');
 const helpers = require('./helpers');
+const config = require('./config');
 
 exports.handler = async function (event, context) {
 
@@ -22,7 +23,7 @@ exports.handler = async function (event, context) {
   const message = getMessage(eventData);
   const subject = '[Mailgun Event Listener] Permanent Fail';
   try {
-    await sns.publish(process.env.SNS_TOPIC_ARN, message, subject);
+    await sns.publish(config.snsTopicArn, message, subject);
     return { statusCode: 200, body: "OK" };
   } catch(err) {
     return { statusCode: 500, body: "Could not send notification message" };

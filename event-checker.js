@@ -1,5 +1,6 @@
 const sns = require('./sns.js');
 const helpers = require('./helpers');
+const config = require('./config');
 
 const subject = '[Mailgun Event Listener] Invalid Event'
 
@@ -13,7 +14,7 @@ exports.assertPermanentFail = async function(eventData) {
     const errMsg = `Invalid event type: expected "${expected}" but received "${received}"`;
     console.error(errMsg);
     const snsMsg = getInvalidEventMessage(expected, received, eventData);
-    await sns.publish(process.env.SNS_TOPIC_ARN, snsMsg, subject);
+    await sns.publish(config.snsTopicArn, snsMsg, subject);
     throw new Error(errMsg);;
   }
 }
